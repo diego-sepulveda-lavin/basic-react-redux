@@ -1,23 +1,32 @@
-import {createStore} from "redux"
+import { createStore } from "redux";
 
-const counterInitialValue = {counter: 0}
+const initialValue = { counter: 0, showCounter: true };
 
-const counterReducer = (state = counterInitialValue, action) => {
-    switch (action.type) {
-        case "increase":
-            return {
-                counter: state.counter + Number(action.payload)
-            }
-        case "decrease":
-            return {
-                counter: state.counter - Number(action.payload)
-            }
-        default:
-            return state
-    }
-}
+const counterReducer = (state = initialValue, action) => {
+	switch (action.type) {
+		case "increase":
+			return {
+				counter: state.counter + Number(action.payload),
+				showCounter: state.showCounter,
+			};
 
-const store = createStore(counterReducer)
+		case "decrease":
+			return {
+				counter: state.counter - Number(action.payload),
+				showCounter: state.showCounter,
+			};
 
-export default store
+		case "toogle":
+			return {
+				counter: state.counter,
+				showCounter: !state.showCounter,
+			};
 
+		default:
+			return state;
+	}
+};
+
+const store = createStore(counterReducer);
+
+export default store;
